@@ -1,7 +1,7 @@
 console.log('Script loaded, THREE defined:', typeof THREE !== 'undefined');
 
 if (typeof THREE === 'undefined') {
-  document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;font-size:18px;color:#333">Three.js 加载失败，请检查网络连接</div>';
+  document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;font-size:18px;color:#333">Three.js 鍔犺浇澶辫触锛岃妫€鏌ョ綉缁滆繛鎺?/div>';
 } else {
   initThree();
 }
@@ -15,11 +15,14 @@ function initThree() {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 0);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
   camera.position.z = 12;
 
   const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.3);
@@ -63,7 +66,7 @@ function initThree() {
 
   if (typeof THREE.GLTFLoader === 'undefined') {
     console.error('GLTFLoader not loaded');
-    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;font-size:18px;color:#333">GLTFLoader 加载失败 — 请通过 http://localhost:8080 访问</div>';
+    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;font-size:18px;color:#333">GLTFLoader 鍔犺浇澶辫触 鈥?璇烽€氳繃 http://localhost:8080 璁块棶</div>';
     return;
   }
 
@@ -95,6 +98,26 @@ function initThree() {
 
         model.rotation.z = pos.rot;
 
+        model.traverse((child) => {
+          if (child.isMesh) {
+            const oldMat = child.material;
+            child.material = new THREE.MeshPhysicalMaterial({
+              color: oldMat.color || new THREE.Color(0xffffff),
+              metalness: 0.1,
+              roughness: 0.05,
+              transmission: 0.95,
+              thickness: 1.5,
+              ior: 1.5,
+              transparent: true,
+              opacity: 0.85,
+              envMapIntensity: 1.0,
+              clearcoat: 1.0,
+              clearcoatRoughness: 0.1,
+              side: THREE.DoubleSide
+            });
+          }
+        });
+
         model.userData = {
           baseX: model.position.x,
           baseY: model.position.y,
@@ -113,13 +136,13 @@ function initThree() {
         scene.add(model);
         letters.push(model);
         loadedCount++;
-        console.log('✓ Loaded:', letter, '(' + loadedCount + '/9)', 'pos:', model.position);
+        console.log('鉁?Loaded:', letter, '(' + loadedCount + '/9)', 'pos:', model.position);
       },
       (progress) => {
         if (progress.total) console.log('Loading:', letter, Math.round(progress.loaded / progress.total * 100) + '%');
       },
       (error) => {
-        console.error('✗ Failed to load:', letter, url, error);
+        console.error('鉁?Failed to load:', letter, url, error);
       }
     );
   });
