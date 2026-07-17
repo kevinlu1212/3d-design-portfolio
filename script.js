@@ -113,18 +113,12 @@ function initScene() {
   // ─── Font & Text ─────────────────────────────────────────
   const letters = []
   const letterData = [
-    { char: 'L', pos: [-5.5, 0.5, 0] },
-    { char: 'B', pos: [-4.5, -0.5, 0.5] },
-    { char: 'L', pos: [-3.5, 0.8, -0.5] },
-    { char: 'P', pos: [-2.0, -0.3, 0] },
-    { char: 'O', pos: [-0.8, 0.6, 0.3] },
-    { char: 'R', pos: [0.4, -0.7, -0.3] },
-    { char: 'T', pos: [1.6, 0.4, 0] },
-    { char: 'F', pos: [2.6, -0.5, 0.5] },
-    { char: 'O', pos: [3.8, 0.8, -0.2] },
-    { char: 'L', pos: [4.8, -0.4, 0] },
-    { char: 'I', pos: [5.6, 0.5, 0.3] },
-    { char: 'O', pos: [6.6, -0.6, -0.5] }
+    { char: 'D', pos: [-4.5, 0.2, 0] },
+    { char: 'E', pos: [-2.7, -0.3, 0.5] },
+    { char: 'S', pos: [-0.9, 0.5, -0.3] },
+    { char: 'I', pos: [0.9, -0.4, 0.2] },
+    { char: 'G', pos: [2.7, 0.3, -0.4] },
+    { char: 'N', pos: [4.5, -0.2, 0] }
   ]
 
   const fontLoader = new THREE.FontLoader()
@@ -135,7 +129,7 @@ function initScene() {
       letterData.forEach((item) => {
         const geom = new THREE.TextGeometry(item.char, {
           font,
-          size: 1.0,
+          size: 1.3,
           height: 0.35,
           curveSegments: 12,
           bevelEnabled: true,
