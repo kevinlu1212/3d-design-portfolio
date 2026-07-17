@@ -1,193 +1,216 @@
-console.log('Script loaded, THREE defined:', typeof THREE !== 'undefined');
+console.log('Glass Portfolio — loading...')
 
 if (typeof THREE === 'undefined') {
-  document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;font-size:18px;color:#333">Three.js 鍔犺浇澶辫触锛岃妫€鏌ョ綉缁滆繛鎺?/div>';
+  document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;font-size:18px;color:#333">Three.js 加载失败</div>'
 } else {
-  initThree();
+  initScene()
 }
 
-function initThree() {
-  const canvas = document.getElementById('three-canvas');
-  if (!canvas) {
-    console.error('Canvas element not found');
-    return;
+function initScene() {
+  const canvas = document.getElementById('three-canvas')
+  if (!canvas) { console.error('Canvas not found'); return }
+
+  // ─── Renderer ───────────────────────────────────────────
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' })
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer.setClearColor(0x000000, 0)
+  renderer.toneMapping = THREE.ACESFilmicToneMapping
+  renderer.toneMappingExposure = 1.0
+  renderer.outputEncoding = THREE.sRGBEncoding
+
+  // ─── Scene & Camera ──────────────────────────────────────
+  const scene = new THREE.Scene()
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100)
+  camera.position.set(0, 0, 8)
+
+  // ─── Controls (mouse drag) ───────────────────────────────
+  const controls = new THREE.OrbitControls(camera, canvas)
+  controls.enableZoom = false
+  controls.enablePan = false
+  controls.maxPolarAngle = Math.PI / 2
+  controls.minPolarAngle = Math.PI / 2
+  controls.autoRotate = true
+  controls.autoRotateSpeed = 1.0
+  controls.target.set(0, 0, 0)
+  controls.update()
+
+  // ─── Lights ──────────────────────────────────────────────
+  const ambient = new THREE.AmbientLight(0x222244, 0.1)
+  scene.add(ambient)
+
+  const keyLight = new THREE.DirectionalLight(0xffffff, 2.0)
+  keyLight.position.set(5, 5, 5)
+  scene.add(keyLight)
+
+  const fillLight = new THREE.DirectionalLight(0x4488ff, 0.6)
+  fillLight.position.set(-5, -5, 2)
+  scene.add(fillLight)
+
+  const rimLight = new THREE.DirectionalLight(0xff6644, 0.4)
+  rimLight.position.set(0, -5, -3)
+  scene.add(rimLight)
+
+  // ─── Environment Map ────────────────────────────────────
+  const pmrem = new THREE.PMREMGenerator(renderer)
+  pmrem.compileEquirectangularShader()
+
+  const envCanvas = document.createElement('canvas')
+  envCanvas.width = 1024
+  envCanvas.height = 512
+  const ctx = envCanvas.getContext('2d')
+
+  // Warm-to-cool gradient sky
+  const grad = ctx.createLinearGradient(0, 0, 1024, 0)
+  grad.addColorStop(0.0, '#ff6b35')
+  grad.addColorStop(0.2, '#ffd23f')
+  grad.addColorStop(0.4, '#6bcb77')
+  grad.addColorStop(0.6, '#4d96ff')
+  grad.addColorStop(0.8, '#9b5de5')
+  grad.addColorStop(1.0, '#ff6b35')
+  ctx.fillStyle = grad
+  ctx.fillRect(0, 0, 1024, 512)
+
+  // Bright specular hotspots
+  ctx.fillStyle = 'rgba(255,255,255,0.7)'
+  for (let i = 0; i < 40; i++) {
+    const x = Math.random() * 1024
+    const y = Math.random() * 512
+    const r = 8 + Math.random() * 32
+    ctx.beginPath()
+    ctx.arc(x, y, r, 0, Math.PI * 2)
+    ctx.fill()
   }
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  const envTexture = new THREE.CanvasTexture(envCanvas)
+  envTexture.mapping = THREE.EquirectangularReflectionMapping
+  const envMap = pmrem.fromEquirectangular(envTexture).texture
+  pmrem.dispose()
+  envTexture.dispose()
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 0);
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
-  camera.position.z = 12;
+  scene.environment = envMap
+  scene.environmentIntensity = 1.5
 
-  const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.3);
-  scene.add(hemi);
+  // ─── Glass Material ────────────────────────────────────
+  const glassMat = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    metalness: 0.0,
+    roughness: 0.02,
+    transmission: 1.0,
+    thickness: 0.6,
+    ior: 1.5,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.0,
+    reflectivity: 0.8,
+    envMapIntensity: 2.0,
+    transparent: true,
+    opacity: 0.95,
+    side: THREE.DoubleSide,
+    attenuationColor: new THREE.Color(0xffffff),
+    attenuationDistance: 0.5
+  })
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
-  keyLight.position.set(6, 6, 6);
-  scene.add(keyLight);
+  // ─── Font & Text ─────────────────────────────────────────
+  const letters = []
+  const letterData = [
+    { char: 'L', pos: [-5.5, 0.5, 0] },
+    { char: 'B', pos: [-4.5, -0.5, 0.5] },
+    { char: 'L', pos: [-3.5, 0.8, -0.5] },
+    { char: 'P', pos: [-2.0, -0.3, 0] },
+    { char: 'O', pos: [-0.8, 0.6, 0.3] },
+    { char: 'R', pos: [0.4, -0.7, -0.3] },
+    { char: 'T', pos: [1.6, 0.4, 0] },
+    { char: 'F', pos: [2.6, -0.5, 0.5] },
+    { char: 'O', pos: [3.8, 0.8, -0.2] },
+    { char: 'L', pos: [4.8, -0.4, 0] },
+    { char: 'I', pos: [5.6, 0.5, 0.3] },
+    { char: 'O', pos: [6.6, -0.6, -0.5] }
+  ]
 
-  const fill = new THREE.DirectionalLight(0x8888ff, 0.4);
-  fill.position.set(-4, 2, 3);
-  scene.add(fill);
+  const fontLoader = new THREE.FontLoader()
 
-  const backLight = new THREE.DirectionalLight(0xffffff, 0.5);
-  backLight.position.set(-2, -3, -6);
-  scene.add(backLight);
+  fontLoader.load(
+    './helvetiker_regular.typeface.json',
+    (font) => {
+      letterData.forEach((item) => {
+        const geom = new THREE.TextGeometry(item.char, {
+          font,
+          size: 1.0,
+          height: 0.35,
+          curveSegments: 12,
+          bevelEnabled: true,
+          bevelThickness: 0.03,
+          bevelSize: 0.02,
+          bevelOffset: 0,
+          bevelSegments: 5
+        })
 
-  const rim = new THREE.PointLight(0xffffcc, 0.7, 20);
-  rim.position.set(0, -4, 4);
-  scene.add(rim);
+        // Center geometry
+        geom.computeBoundingBox()
+        const bb = geom.boundingBox
+        const cx = (bb.max.x + bb.min.x) / 2
+        const cy = (bb.max.y + bb.min.y) / 2
+        const cz = (bb.max.z + bb.min.z) / 2
+        geom.translate(-cx, -cy, -cz)
 
-  const orbit = new THREE.DirectionalLight(0xffccaa, 0.5);
-  scene.add(orbit);
+        const mesh = new THREE.Mesh(geom, glassMat.clone())
+        mesh.position.set(item.pos[0], item.pos[1], item.pos[2])
+        mesh.userData = {
+          baseX: item.pos[0],
+          baseY: item.pos[1],
+          baseZ: item.pos[2],
+          phase: Math.random() * Math.PI * 2,
+          speed: 1.5 + Math.random() * 0.8,
+          floatAmp: 0.25 + Math.random() * 0.15,
+          rotAmp: 0.06 + Math.random() * 0.04
+        }
 
-  const letters = [];
-  const letterFiles = ['L', 'B', 'L', 'D', 'E', 'S', 'I', 'G', 'N'];
+        scene.add(mesh)
+        letters.push(mesh)
+      })
+    },
+    undefined,
+    (err) => console.error('Font load error:', err)
+  )
 
-  const positions = [
-    { x: -3.5, y: 1.5, z: 0, rot: -0.2 },
-    { x: -1.5, y: -0.5, z: 1, rot: 0.15 },
-    { x: 0.5, y: 2, z: -1, rot: -0.1 },
-    { x: -2.5, y: -2, z: 0.5, rot: 0.25 },
-    { x: 2, y: 0.5, z: 0.5, rot: -0.18 },
-    { x: 3.5, y: -0.5, z: -0.5, rot: 0.12 },
-    { x: 1, y: -1.5, z: 1, rot: -0.22 },
-    { x: 2.5, y: 2, z: -1, rot: 0.2 },
-    { x: 4, y: 0, z: 0, rot: -0.15 }
-  ];
-
-  let loadedCount = 0;
-
-  if (typeof THREE.GLTFLoader === 'undefined') {
-    console.error('GLTFLoader not loaded');
-    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;font-size:18px;color:#333">GLTFLoader 鍔犺浇澶辫触 鈥?璇烽€氳繃 http://localhost:8080 璁块棶</div>';
-    return;
-  }
-
-  console.log('GLTFLoader ready, loading GLB files...');
-  const loader = new THREE.GLTFLoader();
-
-  letterFiles.forEach((letter, i) => {
-    const pos = positions[i];
-    const url = letter + '.glb';
-    console.log('Loading:', url);
-
-    loader.load(
-      url,
-      (gltf) => {
-        const model = gltf.scene;
-
-        const box = new THREE.Box3().setFromObject(model);
-        const size = box.getSize(new THREE.Vector3());
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 2.2 / maxDim;
-        model.scale.setScalar(scale);
-
-        const center = box.getCenter(new THREE.Vector3());
-        model.position.set(
-          pos.x - center.x * scale,
-          pos.y - center.y * scale,
-          pos.z - center.z * scale
-        );
-
-        model.rotation.z = pos.rot;
-
-        model.traverse((child) => {
-          if (child.isMesh) {
-            const oldMat = child.material;
-            child.material = new THREE.MeshPhysicalMaterial({
-              color: oldMat.color || new THREE.Color(0xffffff),
-              metalness: 0.1,
-              roughness: 0.05,
-              transmission: 0.95,
-              thickness: 1.5,
-              ior: 1.5,
-              transparent: true,
-              opacity: 0.85,
-              envMapIntensity: 1.0,
-              clearcoat: 1.0,
-              clearcoatRoughness: 0.1,
-              side: THREE.DoubleSide
-            });
-          }
-        });
-
-        model.userData = {
-          baseX: model.position.x,
-          baseY: model.position.y,
-          baseZ: model.position.z,
-          baseRot: pos.rot,
-          speedX: 0.3 + Math.random() * 0.4,
-          speedY: 0.2 + Math.random() * 0.3,
-          speedZ: 0.15 + Math.random() * 0.2,
-          phaseX: Math.random() * Math.PI * 2,
-          phaseY: Math.random() * Math.PI * 2,
-          phaseZ: Math.random() * Math.PI * 2,
-          rotSpeed: 0.2 + Math.random() * 0.3,
-          rotPhase: Math.random() * Math.PI * 2
-        };
-
-        scene.add(model);
-        letters.push(model);
-        loadedCount++;
-        console.log('鉁?Loaded:', letter, '(' + loadedCount + '/9)', 'pos:', model.position);
-      },
-      (progress) => {
-        if (progress.total) console.log('Loading:', letter, Math.round(progress.loaded / progress.total * 100) + '%');
-      },
-      (error) => {
-        console.error('鉁?Failed to load:', letter, url, error);
-      }
-    );
-  });
-
-  const clock = new THREE.Clock();
-
+  // ─── Window Resize ───────────────────────────────────────
   window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+  })
+
+  // ─── Animation Loop ──────────────────────────────────────
+  const clock = new THREE.Clock()
 
   function animate() {
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
+    requestAnimationFrame(animate)
+    const t = clock.getElapsedTime()
 
-    orbit.position.x = Math.sin(t * 0.7) * 10;
-    orbit.position.y = Math.cos(t * 0.5) * 7;
-    orbit.position.z = Math.sin(t * 0.4 + 1) * 8;
+    // Float animation — mimics @react-three/drei <Float>
+    letters.forEach((mesh) => {
+      const d = mesh.userData
+      const ft = t * d.speed + d.phase
+      mesh.position.x = d.baseX + Math.sin(ft * 0.7) * d.floatAmp
+      mesh.position.y = d.baseY + Math.sin(ft) * d.floatAmp * 1.2
+      mesh.position.z = d.baseZ + Math.sin(ft * 0.5 + 1.3) * d.floatAmp * 0.6
+      mesh.rotation.x = Math.sin(ft * 0.5) * d.rotAmp
+      mesh.rotation.y = Math.sin(ft * 0.6 + 0.8) * d.rotAmp * 1.2
+      mesh.rotation.z = Math.sin(ft * 0.4 + 1.5) * d.rotAmp * 0.8
+    })
 
-    letters.forEach((m) => {
-      const d = m.userData;
-      const tX = t * d.speedX + d.phaseX;
-      const tY = t * d.speedY + d.phaseY;
-      m.position.x = d.baseX + Math.sin(tX) * 0.8;
-      m.position.y = d.baseY + Math.sin(tY) * 0.6;
-      m.position.z = d.baseZ + Math.sin(t * d.speedZ + d.phaseZ) * 0.4;
-      m.rotation.z = d.baseRot + Math.sin(t * d.rotSpeed + d.rotPhase) * 0.15;
-      m.rotation.x = Math.sin(tX * 0.6 + d.phaseX) * 0.1;
-      m.rotation.y = Math.cos(tY * 0.6 + d.phaseY) * 0.08;
-    });
-
-    renderer.render(scene, camera);
+    controls.update()
+    renderer.render(scene, camera)
   }
 
-  animate();
+  animate()
 
+  // ─── Scroll nav ─────────────────────────────────────────
   document.querySelectorAll('.nav-btn').forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-      event.preventDefault();
-      const targetId = btn.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
+    btn.addEventListener('click', (e) => {
+      e.preventDefault()
+      const target = document.querySelector(btn.getAttribute('href'))
+      if (target) target.scrollIntoView({ behavior: 'smooth' })
+    })
+  })
 }
