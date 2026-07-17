@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>板块 — TOY LAB OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="section-page">
+
+  <nav class="main-nav" aria-label="主导航">
+    <a href="index.html" class="nav-btn">首页 / HOME</a>
+    <a href="about.html" class="nav-btn">关于 / ABOUT</a>
+  </nav>
+
+  <div class="sub-page page-enter">
+    <a href="index.html" class="back-link">← 返回桌面</a>
+
+    <h1 id="section-title">—</h1>
+
+    <div class="section-hero" id="section-hero"></div>
+
+    <dl class="section-meta">
+      <div>
+        <dt>TYPE</dt>
+        <dd id="meta-type">—</dd>
+      </div>
+      <div>
+        <dt>DATE</dt>
+        <dd id="meta-date">—</dd>
+      </div>
+      <div>
+        <dt>TOOLS</dt>
+        <dd id="meta-tools">—</dd>
+      </div>
+    </dl>
+
+    <div id="section-desc">
+      <p>这里是一段关于该板块的介绍文字。你可以在这里写下这个板块包含的内容、目标和特色。</p>
+    </div>
+  </div>
+
+  <script>
+    const sections = {
+      '1': { title: '板块一', type: '—', date: '—', tools: '—', desc: '<p>板块一的内容介绍。这里可以展示你的第一类作品或项目。</p>' },
+      '2': { title: '板块二', type: '—', date: '—', tools: '—', desc: '<p>板块二的内容介绍。这里可以展示你的第二类作品或项目。</p>' },
+      '3': { title: '板块三', type: '—', date: '—', tools: '—', desc: '<p>板块三的内容介绍。这里可以展示你的第三类作品或项目。</p>' },
+      '4': { title: '板块四', type: '—', date: '—', tools: '—', desc: '<p>板块四的内容介绍。这里可以展示你的第四类作品或项目。</p>' },
+      '5': { title: '板块五', type: '—', date: '—', tools: '—', desc: '<p>板块五的内容介绍。这里可以展示你的第五类作品或项目。</p>' }
+    }
+
+    const params = new URLSearchParams(window.location.search)
+    const id = params.get('id')
+    const section = sections[id]
+
+    if (section) {
+      document.title = section.title + ' — TOY LAB OS'
+      document.getElementById('section-title').textContent = section.title
+      document.getElementById('meta-type').textContent = section.type
+      document.getElementById('meta-date').textContent = section.date
+      document.getElementById('meta-tools').textContent = section.tools
+      document.getElementById('section-desc').innerHTML = section.desc
+    } else {
+      document.getElementById('section-title').textContent = 'NOT FOUND'
+    }
+
+    // Fade in
+    document.body.style.opacity = '0'
+    document.body.style.transition = 'opacity 0.5s ease'
+    window.addEventListener('load', () => { document.body.style.opacity = '1' })
+  </script>
+</body>
+</html>
