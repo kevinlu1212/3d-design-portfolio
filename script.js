@@ -21,35 +21,27 @@ function initScene() {
 
   // ─── Scene & Camera ──────────────────────────────────────
   const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100)
-  camera.position.set(0, 0, 8)
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100)
+  camera.position.set(0, 0, 12)
 
   // ─── Controls (mouse drag) ───────────────────────────────
   const controls = new THREE.OrbitControls(camera, canvas)
   controls.enableZoom = false
   controls.enablePan = false
-  controls.maxPolarAngle = Math.PI / 2
-  controls.minPolarAngle = Math.PI / 2
+  controls.maxPolarAngle = Math.PI / 1.8
+  controls.minPolarAngle = Math.PI / 2.2
   controls.autoRotate = true
-  controls.autoRotateSpeed = 1.0
+  controls.autoRotateSpeed = 0.8
   controls.target.set(0, 0, 0)
   controls.update()
 
   // ─── Lights ──────────────────────────────────────────────
-  const ambient = new THREE.AmbientLight(0x222244, 0.1)
+  const ambient = new THREE.AmbientLight(0xffffff, 0.15)
   scene.add(ambient)
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 2.0)
-  keyLight.position.set(5, 5, 5)
+  const keyLight = new THREE.DirectionalLight(0xffffff, 0.8)
+  keyLight.position.set(10, 10, -5)
   scene.add(keyLight)
-
-  const fillLight = new THREE.DirectionalLight(0x4488ff, 0.6)
-  fillLight.position.set(-5, -5, 2)
-  scene.add(fillLight)
-
-  const rimLight = new THREE.DirectionalLight(0xff6644, 0.4)
-  rimLight.position.set(0, -5, -3)
-  scene.add(rimLight)
 
   // ─── Environment Map ────────────────────────────────────
   const pmrem = new THREE.PMREMGenerator(renderer)
@@ -97,7 +89,7 @@ function initScene() {
     metalness: 0.0,
     roughness: 0.02,
     transmission: 1.0,
-    thickness: 0.6,
+    thickness: 0.8,
     ior: 1.5,
     clearcoat: 1.0,
     clearcoatRoughness: 0.0,
@@ -105,23 +97,21 @@ function initScene() {
     envMapIntensity: 2.0,
     transparent: true,
     opacity: 0.95,
-    side: THREE.DoubleSide,
-    attenuationColor: new THREE.Color(0xffffff),
-    attenuationDistance: 0.5
+    side: THREE.DoubleSide
   })
 
   // ─── Font & Text ─────────────────────────────────────────
   const letters = []
   const letterData = [
-    { char: 'L', pos: [-4.5, 0.3, 0] },
-    { char: 'B', pos: [-3.4, -0.3, 0.4] },
-    { char: 'L', pos: [-2.3, 0.5, -0.3] },
+    { char: 'L', pos: [-6.0, 0.4, 0] },
+    { char: 'B', pos: [-4.5, -0.6, 0.5] },
+    { char: 'L', pos: [-3.0, 0.8, -0.5] },
     { char: 'D', pos: [-1.2, -0.2, 0.2] },
-    { char: 'E', pos: [0, 0.4, -0.2] },
-    { char: 'S', pos: [1.2, -0.4, 0.3] },
-    { char: 'I', pos: [2.3, 0.3, -0.3] },
-    { char: 'G', pos: [3.4, -0.3, 0.2] },
-    { char: 'N', pos: [4.5, 0.2, 0] }
+    { char: 'E', pos: [0.3, 0.6, -0.2] },
+    { char: 'S', pos: [1.8, -0.7, 0.3] },
+    { char: 'I', pos: [3.1, 0.5, -0.5] },
+    { char: 'G', pos: [4.5, -0.4, 0.4] },
+    { char: 'N', pos: [6.0, 0.3, -0.1] }
   ]
 
   const fontLoader = new THREE.FontLoader()
@@ -132,13 +122,12 @@ function initScene() {
       letterData.forEach((item) => {
         const geom = new THREE.TextGeometry(item.char, {
           font,
-          size: 1.15,
-          height: 0.35,
+          size: 1.3,
+          height: 0.4,
           curveSegments: 12,
           bevelEnabled: true,
-          bevelThickness: 0.03,
+          bevelThickness: 0.04,
           bevelSize: 0.02,
-          bevelOffset: 0,
           bevelSegments: 5
         })
 
@@ -157,9 +146,9 @@ function initScene() {
           baseY: item.pos[1],
           baseZ: item.pos[2],
           phase: Math.random() * Math.PI * 2,
-          speed: 1.5 + Math.random() * 0.8,
-          floatAmp: 0.25 + Math.random() * 0.15,
-          rotAmp: 0.06 + Math.random() * 0.04
+          speed: 1.2,
+          floatAmp: 0.35,
+          rotAmp: 0.08
         }
 
         scene.add(mesh)
