@@ -1,1 +1,407 @@
-:root{--ink:#102226;--cream:#f3eedb;--mint:#a7e5c7;--teal:#149b8e;--blue:#184d91;--orange:#ff683c}*{box-sizing:border-box}body{margin:0;background:#12282a;color:var(--ink);font-family:"DM Sans",sans-serif;scroll-behavior:smooth}.site-shell{min-height:100vh;overflow:visible}.room{height:100vh;min-height:680px;position:relative;overflow:visible;background:linear-gradient(110deg,#f0d89c 0%,#efd694 38%,#26b9a4 38.2%,#148b85 100%)}.room:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 77% 14%,transparent 0 15%,rgba(3,36,42,.1) 52%,rgba(3,20,25,.48) 100%);pointer-events:none;z-index:0}.sunlight{position:absolute;width:68vw;height:110vh;left:-10%;top:-26%;background:linear-gradient(110deg,rgba(255,243,202,.92),rgba(255,224,153,.12) 53%,transparent 55%);transform:rotate(12deg);filter:blur(3px)}.wall-stars{position:absolute;right:0;width:62%;height:50%;background-image:radial-gradient(#ffdf66 1.7px,transparent 2px);background-size:42px 38px;opacity:.8}.room-header{position:absolute;z-index:3;top:26px;left:36px;right:36px;display:flex;justify-content:space-between;font:11px "DM Mono";letter-spacing:.12em;color:#204a49}.moon-wallpaper{position:absolute;right:5%;top:20%;font-size:34px;color:#b3f0ca;letter-spacing:28px;transform:rotate(-6deg);opacity:.8}.window-light{position:absolute;z-index:1;left:15%;top:0;width:42vw;height:100%;display:flex;gap:18px;transform:skew(-11deg);opacity:.42}.window-light i{width:26%;height:100%;background:linear-gradient(90deg,rgba(255,255,255,.53),rgba(255,255,255,0));filter:blur(4px)}.shelf{position:absolute;right:9%;top:9%;width:100px;height:168px;border:8px solid #4d3b2e;background:#d69d4e;z-index:2;box-shadow:15px 13px 0 rgba(24,53,50,.25)}.shelf:before,.shelf:after{content:"";height:7px;background:#4d3b2e;left:-7px;right:-7px;position:absolute}.shelf:before{top:51px}.shelf:after{bottom:42px}.shelf span{position:absolute;top:11px;left:10px;font:700 13px/11px "Space Grotesk"}.shelf b,.shelf em{position:absolute;bottom:11px;width:30px;height:23px;background:#ef5538}.shelf b{left:12px;transform:rotate(-8deg)}.shelf em{right:8px;background:#184d91;border-radius:50%}.bed{position:absolute;left:-3%;bottom:0;width:46vw;height:39vh;background:#87513a;transform:skewY(-7deg);z-index:2;box-shadow:inset 0 12px #4f3028}.quilt{position:absolute;left:0;top:17%;width:90%;height:70%;background:#173c89;background-image:radial-gradient(#e7cf53 1.5px,transparent 2px),linear-gradient(40deg,transparent 45%,#6aa7cc 46% 48%,transparent 49%);background-size:26px 27px,52px 52px;border-radius:15px 40px 14px 10px}.pillow{position:absolute;z-index:1;background:#143b78;border:3px solid #e4cc54;width:27%;height:25%;top:4%;border-radius:14px}.p1{left:29%;transform:rotate(10deg)}.p2{left:54%;transform:rotate(-6deg)}.desk{position:absolute;z-index:2;bottom:0;right:4%;width:53vw;height:29vh;background:linear-gradient(170deg,#8d5130,#4e291d);border-radius:8px 8px 0 0;box-shadow:inset 0 8px 0 #b27646,0 -8px 0 rgba(25,20,16,.3)}.desk:before{content:"";position:absolute;left:8%;right:8%;top:47%;height:7px;background:#2e1d18}.computer{border:0;background:transparent;position:absolute;z-index:5;right:19%;bottom:26%;width:min(37vw,540px);height:min(35vw,460px);cursor:pointer;filter:drop-shadow(17px 19px 11px rgba(0,0,0,.33));transition:transform .4s ease}.computer:hover{transform:translateY(-8px) rotate(-1.5deg)}.monitor{display:block;width:100%;height:72%;padding:17px;background:#d8d3bd;border-radius:16px 16px 9px 9px;border:9px solid #736f66;box-shadow:inset 0 0 0 4px #f0e8c9}.screen{display:flex;height:100%;background:#0c4e54;color:#b3f5c9;position:relative;overflow:hidden;border:8px solid #1e2f31;align-items:center;justify-content:center;flex-direction:column;font-family:"DM Mono"}.screen small{font-size:clamp(8px,1vw,13px);letter-spacing:.18em;margin-bottom:7px}.screen strong{font-family:"Space Grotesk";font-size:clamp(24px,4vw,57px);letter-spacing:-.08em;color:#edffb0}.screen em{font-style:normal;font-size:clamp(8px,.9vw,12px);border:1px solid #b3f5c9;padding:6px 9px;margin-top:16px}.scanline{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.11) 0 1px,transparent 1px 5px);mix-blend-mode:overlay}.monitor-neck{display:block;width:20%;height:11%;margin:auto;background:#7f7b70}.monitor-base{display:block;width:43%;height:7%;margin:auto;background:#777469;border-radius:50% 50% 5px 5px}.keyboard{position:absolute;width:86%;height:13%;bottom:0;left:7%;background:repeating-linear-gradient(90deg,#c3b99a 0 9%,#827b68 9.5% 11%);border:7px solid #756d5c;border-radius:4px;transform:perspective(100px) rotateX(25deg)}.room-copy{position:absolute;z-index:4;left:7%;top:36%;color:#1d3c3b}.room-copy p,.room-copy span{font:11px "DM Mono";letter-spacing:.15em}.room-copy h1{font:700 clamp(50px,9vw,130px)/.78 "Space Grotesk";margin:14px 0;letter-spacing:-.11em}.enter-hint{position:absolute;z-index:4;right:6%;bottom:7%;font:10px "DM Mono";letter-spacing:.14em;color:#d9fed2}.teddy{position:absolute;z-index:4;bottom:3%;left:49%;width:140px;height:170px;filter:drop-shadow(8px 7px 3px rgba(0,0,0,.25))}.teddy .body{position:absolute;bottom:0;left:15px;width:110px;height:100px;background:#ca8040;border-radius:50% 50% 36% 36%}.teddy .head{position:absolute;z-index:1;top:0;left:24px;width:91px;height:86px;background:#d9944a;border-radius:49%;border:3px solid #7c4829}.teddy .ears:before,.teddy .ears:after{content:"";position:absolute;top:-5px;width:38px;height:38px;background:#bd7139;border-radius:50%;border:3px solid #7c4829}.teddy .ears:before{left:17px}.teddy .ears:after{right:17px}.teddy .head i{position:absolute;width:8px;height:8px;background:#39231c;border-radius:50%;top:35px}.teddy .head i:first-child{left:23px}.teddy .head i:nth-child(2){right:23px}.teddy .head b{position:absolute;left:37px;top:46px;width:16px;height:12px;background:#f2c18d;border-radius:50%}.console{position:absolute;z-index:4;left:39%;bottom:4%;width:91px;height:48px;background:#e54e31;border:5px solid #66352c;border-radius:12px;transform:rotate(-12deg);display:flex;gap:8px;align-items:center;justify-content:center}.console span,.console b,.console i{height:16px;width:16px;background:#f4dc65;border-radius:4px}.console b{background:#16618b}.console i{background:#52ae68}.os{min-height:100vh;background:var(--cream);position:relative;overflow:hidden;padding:25px 35px}.os:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(19,42,39,.13) .7px,transparent .8px);background-size:8px 8px;pointer-events:none}.os-header,.archive-header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;font:11px "DM Mono";letter-spacing:.08em}.brand{font:700 20px "Space Grotesk";letter-spacing:-.08em;color:var(--ink);text-decoration:none}.brand sup{font:10px "DM Mono";letter-spacing:0}.sound{border:0;background:none;font:11px "DM Mono";cursor:pointer}.os-intro{position:absolute;z-index:1;top:16%;left:7%}.os-intro p,.os-intro span{font:11px "DM Mono";letter-spacing:.12em;line-height:1.5}.os-intro h2{font:700 clamp(76px,14vw,190px)/.68 "Space Grotesk";letter-spacing:-.13em;margin:20px 0}.os-intro h2 i{color:var(--orange);font-style:normal}.folders{position:relative;z-index:2;height:calc(100vh - 100px)}.folder{border:0;position:absolute;width:180px;height:143px;border-radius:5px 5px 11px 11px;cursor:pointer;text-align:left;padding:30px 15px 12px;box-shadow:8px 10px 0 rgba(20,45,42,.17);transition:transform .25s ease}.folder:hover{transform:translateY(-13px) rotate(2deg)!important}.folder .tab{position:absolute;left:0;top:-16px;width:80px;height:24px;border-radius:8px 9px 0 0}.folder b{font:10px "DM Mono"}.folder strong{display:block;font:700 27px/.82 "Space Grotesk";letter-spacing:-.1em;margin-top:8px}.folder em{font-style:normal;position:absolute;right:14px;bottom:12px;font-size:28px}.folder-3d{top:22%;left:35%;background:#75b7ef;transform:rotate(-6deg)}.folder-3d .tab{background:#75b7ef}.folder-toy{top:50%;left:50%;background:#ff8362;transform:rotate(8deg)}.folder-toy .tab{background:#ff8362}.folder-culture{top:13%;right:13%;background:#b5e16d;transform:rotate(7deg)}.folder-culture .tab{background:#b5e16d}.folder-process{bottom:6%;left:19%;background:#c6a9ec;transform:rotate(-9deg)}.folder-process .tab{background:#c6a9ec}.ticker{position:absolute;bottom:0;left:0;right:0;z-index:3;background:var(--ink);color:#d9ffb8;padding:10px 0;white-space:nowrap;overflow:hidden;font:12px "DM Mono";letter-spacing:.13em}.ticker span{display:inline-block;animation:marquee 18s linear infinite}.desktop-deco{position:absolute;z-index:1;font:700 clamp(100px,18vw,250px) "Space Grotesk";color:rgba(16,34,38,.08)}.deco-one{right:1%;bottom:-6%}.deco-two{left:1%;top:11%}.deco-three{right:35%;top:9%}.hidden{display:block}.archive{min-height:100vh;background:#102528;color:#f4efdd;padding:25px 35px}.archive-header button{border:1px solid #f4efdd;background:none;color:inherit;padding:7px 10px;font:11px "DM Mono";cursor:pointer}.project-grid{max-width:1250px;margin:76px auto 30px;display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.project-card{min-height:380px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;color:#12272a;overflow:hidden;position:relative}.project-card:nth-child(1){grid-column:span 7}.project-card:nth-child(2){grid-column:span 5}.project-card:nth-child(3){grid-column:span 5}.project-card:nth-child(4){grid-column:span 7}.peach{background:#ffc2a4}.lime{background:#c8eb77}.blue{background:#79b7ef}.pink{background:#edb6d8}.meta span,.meta p{font:10px "DM Mono";letter-spacing:.09em}.meta h3{font:600 31px/1 "Space Grotesk";letter-spacing:-.08em;margin:7px 0}.card-art{position:absolute;inset:20px 20px 82px}.blob i{position:absolute;border-radius:48%;background:#ff6b50;filter:drop-shadow(9px 12px 0 rgba(74,39,29,.2))}.blob i:nth-child(1){width:43%;height:69%;top:15%;left:29%;transform:rotate(-15deg)}.blob i:nth-child(2){width:24%;height:43%;top:4%;left:16%;background:#8a4bb7}.blob i:nth-child(3){width:18%;height:31%;bottom:5%;right:14%;background:#f5ed89}.flower{display:grid;place-items:center}.flower i{position:absolute;width:33%;height:33%;border-radius:50%;background:#f46665;transform-origin:50% 170%}.flower i:nth-child(1){transform:translateY(-46%) rotate(0)}.flower i:nth-child(2){transform:translate(39%,20%) rotate(72deg)}.flower i:nth-child(3){transform:translate(24%,73%) rotate(144deg)}.flower i:nth-child(4){transform:translate(-24%,73%) rotate(216deg)}.flower:after{content:"";width:27%;height:27%;border-radius:50%;background:#174e87;z-index:2}.cube{perspective:400px}.cube i{position:absolute;left:35%;top:21%;width:35%;height:55%;background:#204d89;transform:rotateX(56deg) rotateZ(45deg)}.cube i:nth-child(2){background:#55a2c3;transform:rotateX(56deg) rotateY(90deg) rotateZ(45deg) translateZ(45px)}.cube i:nth-child(3){background:#dfec92;transform:rotateX(56deg) rotateZ(45deg) translateZ(45px)}.charm i{position:absolute;border:8px solid #e55d8b;width:37%;height:53%;border-radius:50% 50% 43% 43%;left:33%;top:16%}.charm i:nth-child(2){width:12%;height:12%;left:44%;top:37%;background:#e55d8b;border:0}.charm i:nth-child(3){border-color:#7c58b9;transform:rotate(30deg);left:17%;top:42%}@keyframes marquee{to{transform:translateX(-50%)}}@media(max-width:720px){.room{min-height:720px}.room-copy{left:7%;top:19%}.room-copy h1{font-size:72px}.computer{width:82vw;right:8%;bottom:21%}.desk{width:100vw;right:-19%;height:33vh}.bed{width:69vw;height:29vh}.teddy{left:4%;transform:scale(.75);transform-origin:bottom left}.shelf{right:6%;transform:scale(.75);transform-origin:top right}.room-header{left:15px;right:15px;font-size:8px}.moon-wallpaper{top:10%;font-size:17px}.os{padding:18px}.os-header span{display:none}.os-intro{top:14%;left:8%}.folders{height:660px}.folder{width:133px;height:109px;padding:23px 10px 9px}.folder strong{font-size:21px}.folder-3d{top:31%;left:11%}.folder-toy{top:51%;left:51%}.folder-culture{top:14%;right:8%}.folder-process{bottom:10%;left:13%}.archive{padding:18px}.archive-header span:last-child{display:none}.project-grid{margin-top:55px;grid-template-columns:1fr;gap:13px}.project-card,.project-card:nth-child(n){grid-column:span 1;min-height:330px}}
+/* ═══════════════════════════════════════════════════════
+   TOY LAB OS — Interactive Desk Portfolio
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --ink: #102226;
+  --cream: #f3eedb;
+  --mint: #a7e5c7;
+  --teal: #149b8e;
+  --blue: #184d91;
+  --orange: #ff683c;
+  --glow: rgba(255, 200, 100, 0.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0a0a0a;
+  color: var(--cream);
+  font-family: "DM Sans", sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* ═══ Navigation ═══════════════════════════════════════ */
+
+.main-nav {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 8px 16px;
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-btn {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: 0.08em;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+/* ═══ Desk Scene ═══════════════════════════════════════ */
+
+.desk-scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.desk-bg {
+  position: absolute;
+  inset: 0;
+  background: url("assets/desk-cover.jpg") center center / cover no-repeat;
+  z-index: 0;
+}
+
+/* Vignette overlay */
+.desk-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* ═══ Hotspots Layer ═══════════════════════════════════ */
+
+.hotspots-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ═══ Individual Hotspot ═══════════════════════════════ */
+
+.hotspot {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pulse ring animation */
+.hotspot-pulse {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s, transform 0.4s;
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+.hotspot:hover .hotspot-pulse {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  50%  { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+
+/* Label tooltip */
+.hotspot-label {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  border: 1px solid rgba(255, 200, 100, 0.3);
+}
+
+.hotspot-label::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.85);
+}
+
+.hotspot:hover .hotspot-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Hover glow effect on hotspot center */
+.hotspot::before {
+  content: "";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 200, 100, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: scale(0.5);
+}
+
+.hotspot:hover::before {
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+/* ═══ Hotspot Positions (percentage-based) ═════════════ */
+
+/* 🖥️ Computer Monitor — center of desk */
+#hs-monitor {
+  left: 44%;
+  top: 28%;
+  width: 16%;
+  height: 28%;
+}
+
+/* 📋 Space Fury Poster — right wall */
+#hs-poster {
+  left: 72%;
+  top: 8%;
+  width: 18%;
+  height: 42%;
+}
+
+/* 🧸 Teddy Bear — right side of desk */
+#hs-teddy {
+  left: 72%;
+  top: 58%;
+  width: 14%;
+  height: 28%;
+}
+
+/* 🦕 Dinosaur — left-center desk */
+#hs-dino {
+  left: 33%;
+  top: 68%;
+  width: 8%;
+  height: 14%;
+}
+
+/* ⭐ Star Pillow — center desk */
+#hs-star {
+  left: 48%;
+  top: 68%;
+  width: 12%;
+  height: 18%;
+}
+
+/* 🧮 Calculator — left desk */
+#hs-calc {
+  left: 17%;
+  top: 72%;
+  width: 10%;
+  height: 14%;
+}
+
+/* ═══ Bottom Hint ═══════════════════════════════════════ */
+
+.desk-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  animation: hint-fade 3s ease-in-out infinite;
+}
+
+@keyframes hint-fade {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.7; }
+}
+
+/* ═══ Responsive ═══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .main-nav {
+    top: 12px;
+    gap: 4px;
+    padding: 6px 10px;
+  }
+
+  .nav-btn {
+    font-size: 9px;
+    padding: 6px 10px;
+  }
+
+  .hotspot-pulse {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hotspot-label {
+    font-size: 9px;
+    padding: 4px 8px;
+  }
+
+  .desk-hint {
+    font-size: 9px;
+    bottom: 20px;
+  }
+}
+
+/* ═══ Page Transition ═══════════════════════════════════ */
+
+.page-enter {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ Sub Pages (about, project) ═══════════════════════ */
+
+.sub-page {
+  min-height: 100vh;
+  padding: 100px 40px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sub-page h1 {
+  font: 700 clamp(48px, 10vw, 120px) / 0.7 "Space Grotesk", sans-serif;
+  letter-spacing: -0.08em;
+  margin-bottom: 40px;
+}
+
+.sub-page .back-link {
+  display: inline-block;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font: 11px "DM Mono", monospace;
+  letter-spacing: 0.08em;
+  transition: color 0.3s;
+}
+
+.sub-page .back-link:hover {
+  color: #fff;
+}
+
+.sub-page p {
+  font: 16px/1.8 "DM Sans", sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 20px 0;
+}
+
+/* ═══ About Page ═══════════════════════════════════════ */
+
+.about-page {
+  background: #0a0a0a;
+  color: var(--cream);
+}
+
+.about-hero {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  margin-top: 60px;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  font: 700 clamp(32px, 6vw, 72px) / 0.8 "Space Grotesk", sans-serif;
+  letter-spacing: -0.06em;
+  margin: 20px 0;
+}
+
+.about-text h2 em {
+  color: var(--orange);
+  font-style: normal;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.about-tags span {
+  font: 10px "DM Mono", monospace;
+  letter-spacing: 0.1em;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ═══ Project Page ═════════════════════════════════════ */
+
+.project-page {
+  background: #0a0a0a;
+  color: var(--cream);
+}
+
+.project-hero-img {
+  width: 100%;
+  height: 50vh;
+  min-height: 300px;
+  background: #1a1a1a center / cover no-repeat;
+  border-radius: 12px;
+  margin: 40px 0;
+}
+
+.project-meta {
+  display: flex;
+  gap: 40px;
+  margin: 40px 0;
+  padding: 30px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-meta dt {
+  font: 10px "DM Mono", monospace;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 8px;
+}
+
+.project-meta dd {
+  font: 14px "DM Sans", sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+}
