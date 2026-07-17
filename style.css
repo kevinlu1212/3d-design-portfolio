@@ -69,8 +69,7 @@ body {
 .desk-bg {
   position: absolute;
   inset: 0;
-  background: url("assets/desk-cover.png") center center / contain no-repeat;
-  background-color: #0a0a0a;
+  background: url("assets/desk-cover.png") center center / cover no-repeat;
   z-index: 0;
 }
 
