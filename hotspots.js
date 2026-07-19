@@ -12,20 +12,26 @@
     // Parallax on mouse move
     scene.addEventListener('mousemove', handleParallax)
 
+    // Add has-hover class to scene when any hotspot is hovered
+    const hotspots = document.querySelectorAll('.hotspot')
+    hotspots.forEach(hs => {
+      hs.addEventListener('mouseenter', () => scene.classList.add('has-hover'))
+      hs.addEventListener('mouseleave', () => scene.classList.remove('has-hover'))
+    })
+
     // Stagger entrance animation
-    const allHotspots = document.querySelectorAll('.hotspot')
-    allHotspots.forEach((hs, i) => {
+    hotspots.forEach((hs, i) => {
       hs.style.opacity = '0'
-      hs.style.transform = 'translateY(20px)'
+      hs.style.transform = 'translateY(16px)'
       setTimeout(() => {
-        hs.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)'
+        hs.style.transition = 'opacity 0.6s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
         hs.style.opacity = '1'
         hs.style.transform = 'translateY(0)'
       }, 400 + i * 150)
     })
 
     // Keyboard support
-    allHotspots.forEach(hs => {
+    hotspots.forEach(hs => {
       hs.setAttribute('tabindex', '0')
       hs.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -36,6 +42,15 @@
     })
 
     console.log('🎮 TOY LAB OS — Hotspots initialized')
+
+    // Debug: force-hover a hotspot via URL hash, e.g. index.html#hover-hs-toy1
+    if (location.hash.startsWith('#hover-')) {
+      const target = document.getElementById(location.hash.slice(7))
+      if (target) {
+        target.classList.add('force-hover')
+        scene.classList.add('has-hover')
+      }
+    }
   }
 
   function handleParallax(e) {
