@@ -201,9 +201,9 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
-  font: 11px "DM Mono", monospace;
+  font: 20px 'FZLanTingHeiS', 'PingFang SC', sans-serif;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.9);
   animation: hint-fade 3s ease-in-out infinite;
 }
 
