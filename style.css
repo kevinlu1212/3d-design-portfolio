@@ -199,7 +199,7 @@ body {
   z-index: 20;
   font: 20px 'FZLanTingHeiS', 'PingFang SC', sans-serif;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.8);
   animation: hint-fade 3s ease-in-out infinite;
 }
 
