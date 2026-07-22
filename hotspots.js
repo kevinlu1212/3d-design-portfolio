@@ -5,12 +5,16 @@
 (function () {
   'use strict'
 
+  let pointerFrame = 0
+  let pendingPointer = null
+
   function init() {
     const scene = document.querySelector('.desk-scene')
     if (!scene) return
 
-    // Parallax on mouse move
-    scene.addEventListener('mousemove', handleParallax)
+    // Cursor-following light and subtle scene parallax
+    scene.addEventListener('pointermove', handleLight)
+    scene.addEventListener('pointerleave', resetLight)
 
     // Add has-hover class to scene when any hotspot is hovered
     const hotspots = document.querySelectorAll('.hotspot')
@@ -53,15 +57,35 @@
     }
   }
 
-  function handleParallax(e) {
-    const bg = document.querySelector('.desk-bg')
+  function handleLight(e) {
+    if (e.pointerType === 'touch') return
+
+    const scene = e.currentTarget
+    const bg = scene.querySelector('.desk-bg')
     if (!bg) return
 
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
+    const rect = scene.getBoundingClientRect()
+    const x = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
+    const y = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height))
 
-    bg.style.transform = `translate(${x * -6}px, ${y * -4}px) scale(1.01)`
+    pendingPointer = { scene, bg, x, y }
+    if (pointerFrame) return
+
+    pointerFrame = requestAnimationFrame(() => {
+      const { scene: activeScene, bg: activeBg, x: activeX, y: activeY } = pendingPointer
+      activeScene.style.setProperty('--light-x', `${(activeX * 100).toFixed(2)}%`)
+      activeScene.style.setProperty('--light-y', `${(activeY * 100).toFixed(2)}%`)
+      activeBg.style.transform = `translate3d(${(activeX - 0.5) * -14}px, ${(activeY - 0.5) * -9}px, 0) scale(1.045)`
+      pointerFrame = 0
+    })
+  }
+
+  function resetLight(e) {
+    const scene = e.currentTarget
+    const bg = scene.querySelector('.desk-bg')
+    scene.style.setProperty('--light-x', '50%')
+    scene.style.setProperty('--light-y', '34%')
+    if (bg) bg.style.transform = 'translate3d(0, 0, 0) scale(1.045)'
   }
 
   // Smooth page transition on click
