@@ -5,6 +5,9 @@ export default defineConfig({
   base: './',
   assetsInclude: ['**/*.glb'],
   plugins: [react()],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production')
+  },
   build: {
     outDir: 'assets/lanyard-build',
     emptyOutDir: true,
