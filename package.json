@@ -1,0 +1,40 @@
+{
+  "name": "toy-lab-os",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hotspots.js",
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@react-three/rapier": "^2.2.0",
+    "image-size": "^2.0.2",
+    "meshline": "^3.3.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "npm run build:lanyard",
+    "build:lanyard": "vite build",
+    "dev": "vite --host 0.0.0.0",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinlu1212/3d-design-portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kevinlu1212/3d-design-portfolio/issues"
+  },
+  "homepage": "https://kevinlu1212.github.io/3d-design-portfolio/",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.4",
+    "vite": "^8.1.5"
+  }
+}

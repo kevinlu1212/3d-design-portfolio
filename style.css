@@ -404,3 +404,70 @@ body {
   transform: scale(1);
   transform-origin: center;
 }
+
+.lanyard-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 104, 60, 0.16), transparent 34%),
+    linear-gradient(180deg, #111 0%, #050505 100%);
+}
+
+.lanyard-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.lanyard-copy {
+  position: absolute;
+  top: clamp(80px, 10vw, 140px);
+  left: clamp(24px, 6vw, 96px);
+  z-index: 2;
+  max-width: 360px;
+  pointer-events: none;
+}
+
+.lanyard-kicker {
+  font: 500 10px "DM Mono", monospace;
+  letter-spacing: 0.18em;
+  color: var(--orange);
+}
+
+.lanyard-copy h2 {
+  margin-top: 14px;
+  font: 700 clamp(44px, 7vw, 96px) / 0.82 "Space Grotesk", sans-serif;
+  letter-spacing: -0.07em;
+  color: #fff;
+}
+
+.lanyard-copy p {
+  margin-top: 20px;
+  max-width: 280px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+#lanyard-root {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .lanyard-copy {
+    top: 72px;
+  }
+
+  .lanyard-copy h2 {
+    font-size: 48px;
+  }
+}
