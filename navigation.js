@@ -26,7 +26,7 @@
   }
 
   function activateHomeSection(sectionId) {
-    setActiveNav(sectionId === 'lanyard' ? 'lanyard' : 'home')
+    setActiveNav(sectionId === 'lanyard' ? 'about' : 'home')
 
     if (sectionId === 'lanyard' && !lanyardVisible) {
       lanyardVisible = true
@@ -81,11 +81,7 @@
 
   function routeForDirection(direction) {
     if (page === 'home') {
-      return direction > 0 ? 'about.html' : null
-    }
-
-    if (page === 'about') {
-      return direction > 0 ? 'section.html?id=easel' : 'index.html#lanyard'
+      return direction > 0 ? 'section.html?id=easel' : null
     }
 
     if (page === 'works') {
@@ -93,7 +89,7 @@
       const currentIndex = Math.max(0, detailOrder.indexOf(currentId))
       const nextIndex = currentIndex + direction
 
-      if (nextIndex < 0) return 'about.html'
+      if (nextIndex < 0) return 'index.html#lanyard'
       if (nextIndex >= detailOrder.length) return null
       return `section.html?id=${detailOrder[nextIndex]}`
     }

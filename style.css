@@ -487,34 +487,115 @@ body {
   pointer-events: none;
 }
 
-.lanyard-copy {
+.about-card-layout {
   position: absolute;
-  top: clamp(80px, 10vw, 140px);
-  left: clamp(24px, 6vw, 96px);
+  inset: 0;
   z-index: 2;
-  max-width: 360px;
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(360px, 1.35fr) minmax(240px, 1fr);
+  align-items: center;
+  gap: clamp(24px, 3vw, 64px);
+  padding: clamp(92px, 9vw, 132px) clamp(28px, 5vw, 84px) clamp(44px, 5vw, 72px);
   pointer-events: none;
 }
 
+.about-side {
+  max-width: 390px;
+}
+
+.about-side-left {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.about-side-right {
+  grid-column: 3;
+  justify-self: end;
+}
+
 .lanyard-kicker {
+  display: block;
   font: 500 10px "DM Mono", monospace;
   letter-spacing: 0.18em;
   color: var(--orange);
 }
 
-.lanyard-copy h2 {
+.about-display-title {
   margin-top: 14px;
-  font: 700 clamp(44px, 7vw, 96px) / 0.82 "Space Grotesk", sans-serif;
+  font: 700 clamp(54px, 6.8vw, 110px) / 0.78 "Space Grotesk", sans-serif;
   letter-spacing: -0.07em;
   color: #fff;
 }
 
-.lanyard-copy p {
-  margin-top: 20px;
-  max-width: 280px;
+.about-side h3 {
+  margin-top: clamp(24px, 4vh, 48px);
+  font: 700 clamp(27px, 2.9vw, 48px) / 0.92 "Space Grotesk", sans-serif;
+  letter-spacing: -0.055em;
+  color: #fff;
+}
+
+.about-side h3 em {
+  color: var(--orange);
+  font-style: normal;
+}
+
+.about-description {
+  margin-top: 24px;
+  max-width: 340px;
+}
+
+.about-description p,
+.about-drag-hint {
+  margin-top: 12px;
   font-size: 14px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.52);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.about-side .about-tags {
+  margin-top: 22px;
+}
+
+.about-profile {
+  display: grid;
+  gap: 0;
+  margin-top: 34px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.about-profile div {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-profile dt {
+  font: 10px "DM Mono", monospace;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.about-profile dd {
+  font: 500 13px "DM Sans", sans-serif;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.about-contact {
+  display: inline-block;
+  margin-top: 28px;
+  color: #fff;
+  font: 500 13px "DM Mono", monospace;
+  letter-spacing: 0.06em;
+  text-decoration-color: var(--orange);
+  text-underline-offset: 6px;
+  pointer-events: auto;
+}
+
+.about-drag-hint {
+  max-width: 290px;
+  color: rgba(255, 255, 255, 0.36);
 }
 
 #lanyard-root {
@@ -525,11 +606,49 @@ body {
 }
 
 @media (max-width: 768px) {
-  .lanyard-copy {
-    top: 72px;
+  .lanyard-section {
+    min-height: 1650px;
   }
 
-  .lanyard-copy h2 {
-    font-size: 48px;
+  .about-card-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 650px;
+    min-height: 1650px;
+    padding: 90px 22px 54px;
+  }
+
+  .about-side {
+    max-width: none;
+  }
+
+  .about-side-right {
+    align-self: stretch;
+  }
+
+  .about-display-title {
+    font-size: clamp(54px, 18vw, 84px);
+  }
+
+  .about-side h3 {
+    max-width: 340px;
+    font-size: clamp(28px, 9vw, 42px);
+  }
+
+  .about-description {
+    max-width: 420px;
+  }
+
+  #lanyard-root {
+    position: absolute;
+    top: 500px;
+    left: 0;
+    min-height: 650px;
+  }
+
+  .lanyard-wrapper {
+    height: 650px;
   }
 }
