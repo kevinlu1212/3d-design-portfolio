@@ -7,28 +7,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=4" />
+  <link rel="stylesheet" href="style.css?v=5" />
 </head>
-<body>
+<body data-page="home">
   <section class="desk-scene" id="home">
-    <nav class="main-nav">
-      <a href="#home" class="nav-btn active">首页 / HOME</a>
-      <a href="#lanyard" class="nav-btn" data-lanyard-link>关于我 / ABOUT ME</a>
-      <a href="about.html" class="nav-btn">关于 / ABOUT</a>
-      <a href="works.html" class="nav-btn">作品 / WORKS</a> 
+    <nav class="main-nav" aria-label="主导航">
+      <a href="index.html#home" class="nav-btn active" data-nav="home">首页 / HOME</a>
+      <a href="index.html#lanyard" class="nav-btn" data-nav="lanyard">关于我 / ABOUT ME</a>
+      <a href="about.html" class="nav-btn" data-nav="about">关于 / ABOUT</a>
+      <a href="section.html?id=easel" class="nav-btn" data-nav="works">作品 / WORKS</a>
     </nav>
 
     <div class="desk-stage">
       <div class="desk-bg" id="desk-bg"></div>
 
       <div class="hotspots-layer">
-        <a href="about.html" class="hotspot" id="hs-poster" aria-label="进入关于我页面">
-          <div class="toy-wrapper">
-            <img src="assets/sil-poster.png" class="toy-img" alt="关于我海报" draggable="false" />
-            <span class="toy-label">关于我</span>
-          </div>
-        </a>
-
         <a href="section.html?id=easel" class="hotspot object-hotspot" id="hs-easel" aria-label="查看油画架作品详情">
           <span class="object-shell">
             <img src="2.png" class="scene-object" alt="油画架作品" draggable="false" />
@@ -53,7 +46,7 @@
     </div>
 
     <div class="desk-hint">
-      <span>点击桌面上的物品探索 ↗</span>
+      <span>点击物品或滚动页面探索 ↗</span>
     </div>
   </section>
 
@@ -65,7 +58,8 @@
     </div>
     <div id="lanyard-root"></div>
   </section>
-  <script src="hotspots.js?v=4"></script>
+  <script src="navigation.js?v=1"></script>
+  <script src="hotspots.js?v=5"></script>
   <script type="module" src="assets/lanyard-build/lanyard.js?v=4"></script>
 </body>
 </html>

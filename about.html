@@ -7,20 +7,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=5" />
 </head>
-<body class="about-page">
+<body class="about-page" data-page="about">
 
-  <!-- Navigation -->
   <nav class="main-nav" aria-label="主导航">
-    <a href="index.html" class="nav-btn">首页 / HOME</a>
-    <a href="about.html" class="nav-btn active">关于 / ABOUT</a>
-    <a href="index.html#gallery" class="nav-btn">作品 / GALLERY</a>
+    <a href="index.html#home" class="nav-btn" data-nav="home">首页 / HOME</a>
+    <a href="index.html#lanyard" class="nav-btn" data-nav="lanyard">关于我 / ABOUT ME</a>
+    <a href="about.html" class="nav-btn active" data-nav="about">关于 / ABOUT</a>
+    <a href="section.html?id=easel" class="nav-btn" data-nav="works">作品 / WORKS</a>
   </nav>
 
   <div class="sub-page page-enter">
 
-    <a href="index.html" class="back-link">← 返回桌面</a>
+    <a href="index.html#home" class="back-link">← 返回桌面</a>
 
     <h1>SPACE<br/>FURY</h1>
 
@@ -88,5 +88,6 @@
       document.body.style.opacity = '1'
     })
   </script>
+  <script src="navigation.js?v=1"></script>
 </body>
 </html>

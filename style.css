@@ -70,18 +70,14 @@ body {
 }
 
 .desk-stage {
-  --stage-x: 0px;
-  --stage-y: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
   z-index: 0;
   width: max(100vw, 177.7778vh);
   height: max(100vh, 56.25vw);
-  transform: translate3d(calc(-50% + var(--stage-x)), calc(-50% + var(--stage-y)), 0) scale(1.045);
+  transform: translate3d(-50%, -50%, 0) scale(1.035);
   transform-origin: center;
-  transition: transform 0.35s ease-out;
-  will-change: transform;
 }
 
 .desk-bg {
@@ -89,8 +85,7 @@ body {
   inset: 0;
   z-index: 0;
   background: url("背景1.png") center / 100% 100% no-repeat;
-  filter: brightness(0.76) contrast(1.08) saturate(0.86);
-  transition: filter 0.5s ease;
+  filter: brightness(1.05) contrast(1.03) saturate(0.98);
 }
 
 .desk-bg::before,
@@ -104,25 +99,22 @@ body {
 .desk-bg::before {
   inset: -8%;
   background: radial-gradient(
-    circle 22vmax at var(--light-x) var(--light-y),
+    circle 22vmax at 50% 34%,
     rgba(255, 250, 232, 0.52) 0%,
     rgba(255, 226, 173, 0.25) 28%,
     rgba(255, 196, 110, 0.08) 50%,
     transparent 72%
   );
   mix-blend-mode: screen;
-  opacity: 0.9;
+  opacity: 0.72;
 }
 
 .desk-bg::after {
   background:
-    linear-gradient(180deg, rgba(13, 20, 16, 0.14), rgba(26, 17, 9, 0.18)),
-    radial-gradient(ellipse at center, transparent 45%, rgba(8, 7, 5, 0.46) 100%);
+    linear-gradient(180deg, rgba(13, 20, 16, 0.06), rgba(26, 17, 9, 0.08)),
+    radial-gradient(ellipse at center, transparent 48%, rgba(8, 7, 5, 0.32) 100%);
 }
 
-.desk-scene.has-hover .desk-bg {
-  filter: brightness(0.84) contrast(1.06) saturate(0.92);
-}
 
 /* ═══ Hotspots Layer ═══════════════════════════════════ */
 
@@ -145,79 +137,74 @@ body {
   justify-content: center;
 }
 
-.toy-wrapper,
 .object-shell {
   position: relative;
   display: block;
   width: 100%;
   height: 100%;
+  isolation: isolate;
 }
 
-.toy-label,
+.object-shell::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: var(--shadow-bottom, 2%);
+  z-index: 0;
+  width: var(--shadow-width, 78%);
+  height: var(--shadow-height, 8%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(24, 12, 4, 0.9) 0%, rgba(24, 12, 4, 0.48) 42%, transparent 76%);
+  opacity: var(--shadow-opacity, 0.34);
+  filter: blur(var(--shadow-blur, 9px));
+  transform: translateX(-50%) scaleX(1.08);
+  pointer-events: none;
+}
+
 .object-label {
   position: absolute;
   left: 50%;
   bottom: -20px;
   z-index: 3;
   padding: 7px 12px;
-  border: 1px solid rgba(255, 224, 166, 0.28);
+  border: 1px solid rgba(255, 224, 166, 0.2);
   border-radius: 999px;
-  background: rgba(15, 11, 7, 0.78);
-  color: rgba(255, 245, 226, 0.9);
+  background: rgba(15, 11, 7, 0.66);
+  color: rgba(255, 245, 226, 0.82);
   font: 500 9px "DM Mono", monospace;
   letter-spacing: 0.09em;
   white-space: nowrap;
-  opacity: 0;
-  transform: translate(-50%, 8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  opacity: 0.72;
+  transform: translateX(-50%);
   backdrop-filter: blur(8px);
-}
-
-.hotspot:hover .toy-label,
-.hotspot.force-hover .toy-label,
-.hotspot:focus-visible .toy-label,
-.object-hotspot:hover .object-label,
-.object-hotspot.force-hover .object-label,
-.object-hotspot:focus-visible .object-label {
-  opacity: 1;
-  transform: translate(-50%, 0);
+  pointer-events: none;
 }
 
 .scene-object {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
   transform-origin: center bottom;
-  animation: object-outline-pulse 2.7s ease-in-out infinite;
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+  animation: object-outline-pulse 2.9s ease-in-out infinite;
 }
 
 @keyframes object-outline-pulse {
   0%, 100% {
     filter:
-      drop-shadow(0 0 1px rgba(var(--object-glow), 0.55))
-      drop-shadow(0 0 5px rgba(var(--object-glow), 0.18));
+      drop-shadow(0 2px 2px rgba(30, 14, 5, 0.32))
+      drop-shadow(0 0 2px rgba(var(--object-glow), 0.36))
+      drop-shadow(0 0 6px rgba(var(--object-glow), 0.12));
   }
   50% {
     filter:
-      drop-shadow(0 0 2px rgba(var(--object-glow), 0.9))
-      drop-shadow(0 0 13px rgba(var(--object-glow), 0.48))
-      drop-shadow(0 0 24px rgba(var(--object-glow), 0.18));
+      drop-shadow(0 3px 3px rgba(30, 14, 5, 0.4))
+      drop-shadow(0 0 3px rgba(var(--object-glow), 0.65))
+      drop-shadow(0 0 11px rgba(var(--object-glow), 0.28));
   }
-}
-
-.object-hotspot:hover .scene-object,
-.object-hotspot.force-hover .scene-object,
-.object-hotspot:focus-visible .scene-object {
-  animation: none;
-  transform: translateY(-10px) scale(1.035);
-  filter:
-    brightness(1.12)
-    drop-shadow(0 0 2px rgba(var(--object-glow), 1))
-    drop-shadow(0 0 18px rgba(var(--object-glow), 0.72))
-    drop-shadow(0 0 36px rgba(var(--object-glow), 0.32));
 }
 
 .object-hotspot:focus-visible {
@@ -226,70 +213,47 @@ body {
   border-radius: 16px;
 }
 
-/* Silhouette image — glow follows the PNG alpha contour */
-.toy-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-  transition:
-    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-    filter 0.4s ease;
-}
 
-/* Hover: brighten + contour glow + float up */
-.hotspot:hover .toy-img,
-.hotspot.force-hover .toy-img,
-.hotspot:focus-visible .toy-img {
-  transform: translateY(-16px);
-  filter:
-    brightness(1.35)
-    drop-shadow(0 0 12px rgba(255, 200, 100, 0.9))
-    drop-shadow(0 0 32px rgba(255, 200, 100, 0.45));
-}
-
-/* Subtle idle pulse on the silhouette contour */
-@keyframes toy-pulse {
-  0%, 100% { filter: drop-shadow(0 0 3px rgba(255, 200, 100, 0.10)); }
-  50%      { filter: drop-shadow(0 0 8px rgba(255, 200, 100, 0.28)); }
-}
-
-.hotspot:not(:hover):not(.force-hover) .toy-img {
-  animation: toy-pulse 3s ease-in-out infinite;
-}
 
 /* ═══ Hotspot Positions (aligned to desk scene, aspect-matched to silhouettes) ═══ */
 
-/* 📋 Poster — right wall */
-#hs-poster {
-  left: 70.5%;
-  top: 0.5%;
-  width: 24.5%;
-  height: 54%;
-}
 
 /* New portfolio objects — aligned to 背景.png reference */
 #hs-easel {
   --object-glow: 255, 177, 83;
+  --shadow-width: 84%;
+  --shadow-height: 7%;
+  --shadow-bottom: 0%;
+  --shadow-blur: 8px;
+  --shadow-opacity: 0.38;
   left: 12.2%;
   top: 47.5%;
-  z-index: 2;
+  z-index: 3;
   width: 15.2%;
   height: 40.5%;
 }
 
 #hs-sculpture {
   --object-glow: 255, 230, 190;
+  --shadow-width: 72%;
+  --shadow-height: 7%;
+  --shadow-bottom: 1%;
+  --shadow-blur: 10px;
+  --shadow-opacity: 0.3;
   left: 21.5%;
   top: 41.2%;
-  z-index: 3;
+  z-index: 2;
   width: 13.4%;
   height: 38.8%;
 }
 
 #hs-art-toy {
   --object-glow: 151, 218, 105;
+  --shadow-width: 90%;
+  --shadow-height: 10%;
+  --shadow-bottom: 2%;
+  --shadow-blur: 8px;
+  --shadow-opacity: 0.4;
   left: 70.7%;
   top: 65.2%;
   z-index: 4;
@@ -320,8 +284,6 @@ body {
 
 @media (max-width: 768px) {
   .desk-stage {
-    --stage-x: 0px !important;
-    --stage-y: 0px !important;
     width: 100vw;
     height: 56.25vw;
     transform: translate3d(-50%, -50%, 0) scale(1);
@@ -329,8 +291,20 @@ body {
 
   .main-nav {
     top: 12px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-width: none;
+    justify-content: flex-start;
     gap: 4px;
     padding: 6px 10px;
+    transform: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .main-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-btn {
@@ -345,17 +319,14 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .desk-stage {
-    transition: none;
-  }
-
   .scene-object {
     animation: none;
   }
+}
 
-  .desk-bg {
-    transition: filter 0.3s ease;
-  }
+.route-leaving {
+  opacity: 0 !important;
+  transition: opacity 0.24s ease !important;
 }
 
 /* ═══ Page Transition ═══════════════════════════════════ */
