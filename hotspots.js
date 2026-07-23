@@ -49,7 +49,7 @@
 
     console.log('🎮 TOY LAB OS — Hotspots initialized')
 
-    // Debug: force-hover a hotspot via URL hash, e.g. index.html#hover-hs-toy1
+    // Debug: force-hover a hotspot via URL hash, e.g. index.html#hover-hs-easel
     if (location.hash.startsWith('#hover-')) {
       const target = document.getElementById(location.hash.slice(7))
       if (target) {
@@ -85,31 +85,35 @@
     if (e.pointerType === 'touch') return
 
     const scene = e.currentTarget
-    const bg = scene.querySelector('.desk-bg')
-    if (!bg) return
+    const stage = scene.querySelector('.desk-stage')
+    if (!stage) return
 
     const rect = scene.getBoundingClientRect()
     const x = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))
     const y = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height))
 
-    pendingPointer = { scene, bg, x, y }
+    pendingPointer = { scene, stage, x, y }
     if (pointerFrame) return
 
     pointerFrame = requestAnimationFrame(() => {
-      const { scene: activeScene, bg: activeBg, x: activeX, y: activeY } = pendingPointer
+      const { scene: activeScene, stage: activeStage, x: activeX, y: activeY } = pendingPointer
       activeScene.style.setProperty('--light-x', `${(activeX * 100).toFixed(2)}%`)
       activeScene.style.setProperty('--light-y', `${(activeY * 100).toFixed(2)}%`)
-      activeBg.style.transform = `translate3d(${(activeX - 0.5) * -14}px, ${(activeY - 0.5) * -9}px, 0) scale(1.045)`
+      activeStage.style.setProperty('--stage-x', `${(activeX - 0.5) * -14}px`)
+      activeStage.style.setProperty('--stage-y', `${(activeY - 0.5) * -9}px`)
       pointerFrame = 0
     })
   }
 
   function resetLight(e) {
     const scene = e.currentTarget
-    const bg = scene.querySelector('.desk-bg')
+    const stage = scene.querySelector('.desk-stage')
     scene.style.setProperty('--light-x', '50%')
     scene.style.setProperty('--light-y', '34%')
-    if (bg) bg.style.transform = 'translate3d(0, 0, 0) scale(1.045)'
+    if (stage) {
+      stage.style.setProperty('--stage-x', '0px')
+      stage.style.setProperty('--stage-y', '0px')
+    }
   }
 
   // Smooth page transition on click

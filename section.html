@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>板块 — TOY LAB OS</title>
+  <title>作品详情 — TOY LAB OS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body class="section-page">
 
@@ -45,11 +45,30 @@
 
   <script>
     const sections = {
-      '1': { title: '板块一', type: '—', date: '—', tools: '—', desc: '<p>板块一的内容介绍。这里可以展示你的第一类作品或项目。</p>' },
-      '2': { title: '板块二', type: '—', date: '—', tools: '—', desc: '<p>板块二的内容介绍。这里可以展示你的第二类作品或项目。</p>' },
-      '3': { title: '板块三', type: '—', date: '—', tools: '—', desc: '<p>板块三的内容介绍。这里可以展示你的第三类作品或项目。</p>' },
-      '4': { title: '板块四', type: '—', date: '—', tools: '—', desc: '<p>板块四的内容介绍。这里可以展示你的第四类作品或项目。</p>' },
-      '5': { title: '板块五', type: '—', date: '—', tools: '—', desc: '<p>板块五的内容介绍。这里可以展示你的第五类作品或项目。</p>' }
+      easel: {
+        title: '油画架 / EASEL STUDY',
+        type: 'VISUAL DESIGN',
+        date: '2026',
+        tools: 'ILLUSTRATION · 3D · COMPOSITION',
+        image: '2.png',
+        desc: '<p>以桌面油画架为视觉入口，将绘画、空间陈设与个人审美组合为一组叙事场景。点击作品后可继续补充项目过程、草图与最终成品。</p>'
+      },
+      sculpture: {
+        title: '石膏像 / FORM STUDY',
+        type: 'FORM & LIGHT STUDY',
+        date: '2026',
+        tools: '3D · LIGHTING · MATERIAL',
+        image: '1.png',
+        desc: '<p>围绕石膏像的体块、材质和暖色灯光展开造型研究，通过明暗层次强化古典雕塑与复古桌面空间之间的关系。</p>'
+      },
+      'art-toy': {
+        title: '潮玩 / ART TOY',
+        type: 'CHARACTER DESIGN',
+        date: '2026',
+        tools: 'CONCEPT · 3D · PRODUCT',
+        image: '0.png',
+        desc: '<p>绿色头套潮玩角色以夸张比例和低饱和材质建立辨识度，展示角色设定、潮玩产品语言与场景化呈现。</p>'
+      }
     }
 
     const params = new URLSearchParams(window.location.search)
@@ -63,6 +82,7 @@
       document.getElementById('meta-date').textContent = section.date
       document.getElementById('meta-tools').textContent = section.tools
       document.getElementById('section-desc').innerHTML = section.desc
+      document.getElementById('section-hero').style.backgroundImage = `url("${section.image}")`
     } else {
       document.getElementById('section-title').textContent = 'NOT FOUND'
     }

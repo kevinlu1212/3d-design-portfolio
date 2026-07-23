@@ -7,12 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body>
   <section class="desk-scene" id="home">
-    <div class="desk-bg" id="desk-bg"></div>
-
     <nav class="main-nav">
       <a href="#home" class="nav-btn active">首页 / HOME</a>
       <a href="#lanyard" class="nav-btn" data-lanyard-link>关于我 / ABOUT ME</a>
@@ -20,56 +18,38 @@
       <a href="works.html" class="nav-btn">作品 / WORKS</a> 
     </nav>
 
-    <div class="hotspots-layer">
+    <div class="desk-stage">
+      <div class="desk-bg" id="desk-bg"></div>
 
-      <!-- 📋 Poster -->
-      <a href="about.html" class="hotspot" id="hs-poster">
-        <div class="toy-wrapper">
-          <img src="assets/sil-poster.png" class="toy-img" alt="" draggable="false" />
-          <span class="toy-label">关于我</span>
-        </div>
-      </a>
+      <div class="hotspots-layer">
+        <a href="about.html" class="hotspot" id="hs-poster" aria-label="进入关于我页面">
+          <div class="toy-wrapper">
+            <img src="assets/sil-poster.png" class="toy-img" alt="关于我海报" draggable="false" />
+            <span class="toy-label">关于我</span>
+          </div>
+        </a>
 
-      <!-- 🧸 Toy 1 -->
-      <a href="section.html?id=1" class="hotspot" id="hs-toy1">
-        <div class="toy-wrapper">
-          <img src="assets/sil-teddy.png" class="toy-img" alt="" draggable="false" />
-          <span class="toy-label">泰迪熊</span>
-        </div>
-      </a>
+        <a href="section.html?id=easel" class="hotspot object-hotspot" id="hs-easel" aria-label="查看油画架作品详情">
+          <span class="object-shell">
+            <img src="2.png" class="scene-object" alt="油画架作品" draggable="false" />
+            <span class="object-label">油画架 / EASEL</span>
+          </span>
+        </a>
 
-      <!-- 🦕 Toy 2 -->
-      <a href="section.html?id=2" class="hotspot" id="hs-toy2">
-        <div class="toy-wrapper">
-          <img src="assets/sil-dino.png" class="toy-img" alt="" draggable="false" />
-          <span class="toy-label">小恐龙</span>
-        </div>
-      </a>
+        <a href="section.html?id=sculpture" class="hotspot object-hotspot" id="hs-sculpture" aria-label="查看石膏像作品详情">
+          <span class="object-shell">
+            <img src="1.png" class="scene-object" alt="石膏像作品" draggable="false" />
+            <span class="object-label">石膏像 / SCULPTURE</span>
+          </span>
+        </a>
 
-      <!-- ⭐ Toy 3 -->
-      <a href="section.html?id=3" class="hotspot" id="hs-toy3">
-        <div class="toy-wrapper">
-          <img src="assets/sil-pillow.png" class="toy-img" alt="" draggable="false" />
-          <span class="toy-label">星星抱枕</span>
-        </div>
-      </a>
-
-      <!-- 🧮 Toy 4 -->
-      <a href="section.html?id=4" class="hotspot" id="hs-toy4">
-        <div class="toy-wrapper">
-          <img src="assets/sil-calc.png" class="toy-img" alt="" draggable="false" />
-          <span class="toy-label">计算器</span>
-        </div>
-      </a>
-
-      <!-- ⚽ Toy 5 -->
-      <a href="section.html?id=5" class="hotspot" id="hs-toy5">
-        <div class="toy-wrapper">
-          <img src="assets/sil-soccer.png" class="toy-img" alt="" draggable="false" />
-          <span class="toy-label">足球</span>
-        </div>
-      </a>
-
+        <a href="section.html?id=art-toy" class="hotspot object-hotspot" id="hs-art-toy" aria-label="查看潮玩作品详情">
+          <span class="object-shell">
+            <img src="0.png" class="scene-object" alt="绿色潮玩作品" draggable="false" />
+            <span class="object-label">潮玩 / ART TOY</span>
+          </span>
+        </a>
+      </div>
     </div>
 
     <div class="desk-hint">
@@ -85,7 +65,7 @@
     </div>
     <div id="lanyard-root"></div>
   </section>
-  <script src="hotspots.js?v=2"></script>
+  <script src="hotspots.js?v=4"></script>
   <script type="module" src="assets/lanyard-build/lanyard.js?v=4"></script>
 </body>
 </html>
