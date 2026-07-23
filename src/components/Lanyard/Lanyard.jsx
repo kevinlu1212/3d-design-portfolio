@@ -193,6 +193,36 @@ function Band({
       return () => void (document.body.style.cursor = 'auto');
     }
   }, [hovered, dragged]);
+  useEffect(() => {
+    let retryTimer;
+
+    const applyGravityPulse = () => {
+      const cardBody = card.current;
+      if (!cardBody) {
+        retryTimer = window.setTimeout(applyGravityPulse, 120);
+        return;
+      }
+
+      [card, j1, j2, j3].forEach(ref => ref.current?.wakeUp());
+      cardBody.setLinvel({ x: 0, y: 0, z: 0 }, true);
+      cardBody.setAngvel({ x: 0, y: 0, z: 0 }, true);
+      cardBody.applyImpulse({ x: 1.8, y: -3.2, z: 0.6 }, true);
+      cardBody.applyTorqueImpulse({ x: 0.45, y: 1.8, z: -1.25 }, true);
+      window.__lanyardGravityPending = false;
+    };
+
+    const handleGravity = () => applyGravityPulse();
+    window.addEventListener('lanyard:gravity', handleGravity);
+
+    if (window.__lanyardGravityPending) {
+      retryTimer = window.setTimeout(applyGravityPulse, 180);
+    }
+
+    return () => {
+      window.removeEventListener('lanyard:gravity', handleGravity);
+      window.clearTimeout(retryTimer);
+    };
+  }, []);
 
   useFrame((state, delta) => {
     if (dragged) {

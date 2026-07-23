@@ -12,6 +12,8 @@
     const scene = document.querySelector('.desk-scene')
     if (!scene) return
 
+    initLanyardNavigation()
+
     // Cursor-following light and subtle scene parallax
     scene.addEventListener('pointermove', handleLight)
     scene.addEventListener('pointerleave', resetLight)
@@ -57,6 +59,28 @@
     }
   }
 
+  function initLanyardNavigation() {
+    const link = document.querySelector('[data-lanyard-link]')
+    const section = document.getElementById('lanyard')
+    if (!link || !section) return
+
+    const dispatchGravity = () => {
+      window.dispatchEvent(new CustomEvent('lanyard:gravity'))
+    }
+
+    link.addEventListener('click', (event) => {
+      event.preventDefault()
+      window.__lanyardGravityPending = true
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      history.replaceState(null, '', '#lanyard')
+      setTimeout(dispatchGravity, 650)
+    })
+
+    if (location.hash === '#lanyard') {
+      window.__lanyardGravityPending = true
+      setTimeout(dispatchGravity, 650)
+    }
+  }
   function handleLight(e) {
     if (e.pointerType === 'touch') return
 
